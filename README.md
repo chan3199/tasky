@@ -68,7 +68,7 @@
 
 ## ☁️ 인프라 구성
 
-plaintext
+```plaintext
 [개발자]
    ↓ Push
 [GitHub]
