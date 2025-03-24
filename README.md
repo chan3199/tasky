@@ -77,6 +77,8 @@
    ↓ Docker Build & Run
 [Express 백엔드 + SQLite]
 [React 프론트엔드 on Netlify]
+---
+
 
 📁 프로젝트 폴더 구조
 📦 tasky
