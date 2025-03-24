@@ -68,7 +68,7 @@
 
 ## ☁️ 인프라 구성
 
-'''plaintext
+plaintext
 [개발자]
    ↓ Push
 [GitHub]
@@ -79,35 +79,37 @@
 [React 프론트엔드 on Netlify]
 
 
-##📁 프로젝트 폴더 구조
+## 📁 프로젝트 폴더 구조
+
+```plaintext
 📦 tasky
-├── client/                # 프론트엔드 (React + Vite + TypeScript)
+├── client/                  # 프론트엔드 (React + Vite + TypeScript)
 │   ├── public/
 │   ├── src/
-│   │   ├── components/    # UI 컴포넌트 모음
-│   │   ├── pages/         # 페이지 단위 컴포넌트 (Login, Signup, Todo 등)
-│   │   ├── api/           # 백엔드 API 호출 모듈
-│   │   ├── hooks/         # 커스텀 훅
-│   │   └── main.tsx       # 엔트리 포인트
+│   │   ├── components/      # UI 컴포넌트 모음
+│   │   ├── pages/           # 페이지 단위 컴포넌트 (Login, Signup, Todo 등)
+│   │   ├── api/             # 백엔드 API 호출 모듈
+│   │   ├── hooks/           # 커스텀 훅
+│   │   └── main.tsx         # 엔트리 포인트
 │   ├── index.html
 │   └── vite.config.ts
 │
-├── server/                # 백엔드 (Node.js + Express)
+├── server/                  # 백엔드 (Node.js + Express)
 │   ├── src/
-│   │   ├── routes/        # API 라우터
-│   │   ├── controllers/   # 요청 처리 로직
-│   │   ├── middleware/    # 인증 등 미들웨어
-│   │   ├── models/        # DB 모델
-│   │   ├── utils/         # 유틸 함수
-│   │   └── index.js       # 앱 시작점
+│   │   ├── routes/          # API 라우터
+│   │   ├── controllers/     # 요청 처리 로직
+│   │   ├── middleware/      # 인증 등 미들웨어
+│   │   ├── models/          # DB 모델
+│   │   ├── utils/           # 유틸 함수
+│   │   └── index.js         # 앱 시작점
 │   └── package.json
 │
 ├── docker/
-│   ├── client.Dockerfile  # 프론트 Dockerfile
-│   ├── server.Dockerfile  # 백엔드 Dockerfile
-│   └── nginx.conf         # Nginx 설정 파일 (선택 시)
+│   ├── client.Dockerfile    # 프론트 Dockerfile
+│   ├── server.Dockerfile    # 백엔드 Dockerfile
+│   └── nginx.conf           # Nginx 설정 파일 (선택 시)
 │
-├── docker-compose.yml     # 프론트 + 백엔드 동시에 실행
-├── Jenkinsfile            # CI/CD 자동화 스크립트
-├── README.md              # 프로젝트 설명서
+├── docker-compose.yml       # 프론트 + 백엔드 동시에 실행
+├── Jenkinsfile              # CI/CD 자동화 스크립트
+├── README.md                # 프로젝트 설명서
 └── .gitignore
