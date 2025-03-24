@@ -67,7 +67,8 @@
 ---
 
 ## ☁️ 인프라 구성
-plaintext
+
+'''plaintext
 [개발자]
    ↓ Push
 [GitHub]
@@ -78,7 +79,7 @@ plaintext
 [React 프론트엔드 on Netlify]
 
 
-**##**📁 프로젝트 폴더 구조
+##📁 프로젝트 폴더 구조
 📦 tasky
 ├── client/                # 프론트엔드 (React + Vite + TypeScript)
 │   ├── public/
