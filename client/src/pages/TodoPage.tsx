@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
 import { getTodos, addTodo, deleteTodo } from '../api/todo';
-import { logout } from '../utils/auth';
 import { useNavigate } from 'react-router-dom';
-import { jwtDecode } from 'jwt-decode';
+import Header from '../components/Header';
+import { getUserEmail } from '../utils/jwt';
 
 interface Todo {
   id: number;
@@ -10,18 +10,27 @@ interface Todo {
 }
 
 export default function TodoPage() {
+
+  useEffect(() => {
+    fetchTodos();
+  }, []);
+
+  useEffect(() => {
+    if (!localStorage.getItem('token')) {
+      navigate('/');
+    }
+  }, []);
+
   const [todos, setTodos] = useState<Todo[]>([]);
   const [text, setText] = useState('');
+  
 
   const navigate = useNavigate();
 
-  const email = jwtDecode<{ email: string }>(localStorage.getItem('token')!);
-  
+  const email = getUserEmail();
 
-  const handleLogout = () => {
-    logout();
-    navigate('/');
-  };
+  if (!email) return null;
+  
 
   const fetchTodos = async () => {
     const data = await getTodos();
@@ -39,21 +48,10 @@ export default function TodoPage() {
     setTodos(todos.filter((todo) => todo.id !== id));
   };
 
-  useEffect(() => {
-    fetchTodos();
-  }, []);
-
-  useEffect(() => {
-    if (!localStorage.getItem('token')) {
-      navigate('/');
-    }
-  }, []);
-
   return (
-    <div>
+    <><Header email={email} /><div className="p-4">
       <h2>📝 할 일 목록</h2>
-      <h3 className="text-gray-600">환영합니다, {email.email}님!</h3>
-      <button onClick={handleLogout}>로그아웃</button>
+      <h3 className="text-gray-600">환영합니다, {email}님!</h3>
       <input value={text} onChange={(e) => setText(e.target.value)} />
       <button onClick={handleAdd}>추가</button>
       <ul>
@@ -64,6 +62,6 @@ export default function TodoPage() {
           </li>
         ))}
       </ul>
-    </div>
+    </div></>
   );
 }

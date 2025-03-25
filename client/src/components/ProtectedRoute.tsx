@@ -1,6 +1,6 @@
 import { Navigate } from 'react-router-dom';
 import { isLoggedIn } from '../utils/auth';
-import { notify } from '../utils/utils';
+import { notify } from '../utils/toast';
 import { JSX } from 'react';
 
 export default function ProtectedRoute({ children }: { children: JSX.Element }) {

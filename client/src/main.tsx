@@ -6,6 +6,7 @@ import TodoPage from './pages/TodoPage';
 import ProtectedRoute from './components/ProtectedRoute';
 import { Toaster } from 'react-hot-toast';
 import './index.css';
+import Signup from './pages/Signup';
 
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
@@ -13,13 +14,14 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
     <BrowserRouter>
       <Toaster /> {/* ✅ 알림 UI */}
       <Routes>
-        <Route path="/" element={<Login />} />
-        <Route path="/todos" element={
-        <ProtectedRoute>
-          <TodoPage />
-        </ProtectedRoute>
-        } />
-      </Routes>
+  <Route path="/" element={<Login />} />
+  <Route path="/signup" element={<Signup />} />
+  <Route path="/todos" element={
+    <ProtectedRoute>
+      <TodoPage />
+    </ProtectedRoute>
+  } />
+</Routes>
     </BrowserRouter>
   </React.StrictMode>
 );
