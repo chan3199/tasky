@@ -7,8 +7,9 @@ const todoRoutes = require('./routes/todo');
 
 app.use(cors(
   {
-    origin: ['http://localhost:5173', 'https://tasky.netlify.app'], // ✅ Netlify 배포 주소
-    credentials: true, // (선택) 인증 정보 쿠키 등을 포함할 때
+    origin: ['http://localhost:5173', 'https://wondrous-unicorn-f48837.netlify.app'], // ✅ Netlify 배포 주소
+    methods: ['GET', 'POST', 'PUT', 'DELETE'],
+    credentials: true
   }
 ));
 app.use(express.json());
