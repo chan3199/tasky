@@ -1,5 +1,7 @@
 import { useEffect, useState } from 'react';
 import { getTodos, addTodo, deleteTodo } from '../api/todo';
+import { logout } from '../utils/auth';
+import { useNavigate } from 'react-router-dom';
 
 interface Todo {
   id: number;
@@ -9,6 +11,13 @@ interface Todo {
 export default function TodoPage() {
   const [todos, setTodos] = useState<Todo[]>([]);
   const [text, setText] = useState('');
+
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    logout();
+    navigate('/');
+  };
 
   const fetchTodos = async () => {
     const data = await getTodos();
@@ -33,6 +42,7 @@ export default function TodoPage() {
   return (
     <div>
       <h2>📝 할 일 목록</h2>
+      <button onClick={handleLogout}>로그아웃</button>
       <input value={text} onChange={(e) => setText(e.target.value)} />
       <button onClick={handleAdd}>추가</button>
       <ul>
