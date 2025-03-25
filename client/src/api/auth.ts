@@ -1,15 +1,18 @@
 import axios from 'axios';
 
-const API = axios.create({
-  baseURL: 'http://localhost:4000/api',
-});
+const API_BASE_URL = 'https://tasky-api.onrender.com'; // ✅ Render에서 받은 주소
 
-export const login = async (email: string, password: string) => {
-  const res = await API.post('/auth/login', { email, password });
-  return res.data.token;
+export const login = (email: string, password: string) => {
+  return axios.post(`${API_BASE_URL}/api/auth/login`, { email, password });
 };
 
-export const signup = async (email: string, password: string) => {
-  const res = await API.post('/auth/signup', { email, password });
-  return res.data;
+export const signup = (email: string, password: string) => {
+  return axios.post(`${API_BASE_URL}/api/auth/signup`, { email, password });
+};
+
+export const getTodos = () => {
+  const token = localStorage.getItem('token');
+  return axios.get(`${API_BASE_URL}/api/todos`, {
+    headers: { Authorization: `Bearer ${token}` }
+  });
 };

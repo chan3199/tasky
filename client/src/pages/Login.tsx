@@ -9,8 +9,7 @@ export default function Login() {
 
   const handleLogin = async (email: string, password: string) => {
     try {
-      const token = await login(email, password);
-      localStorage.setItem('token', token);
+      localStorage.setItem('token', (await login(email, password)).data.token);
       notify('로그인 성공!');
       navigate('/todos');
     } catch (err) {
