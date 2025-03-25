@@ -5,6 +5,7 @@ import Login from './pages/Login';
 import TodoPage from './pages/TodoPage';
 import ProtectedRoute from './components/ProtectedRoute';
 import { Toaster } from 'react-hot-toast';
+import './index.css';
 
 
 ReactDOM.createRoot(document.getElementById('root')!).render(

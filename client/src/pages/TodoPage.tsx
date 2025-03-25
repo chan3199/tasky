@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { getTodos, addTodo, deleteTodo } from '../api/todo';
 import { logout } from '../utils/auth';
 import { useNavigate } from 'react-router-dom';
+import { jwtDecode } from 'jwt-decode';
 
 interface Todo {
   id: number;
@@ -13,6 +14,9 @@ export default function TodoPage() {
   const [text, setText] = useState('');
 
   const navigate = useNavigate();
+
+  const email = jwtDecode<{ email: string }>(localStorage.getItem('token')!);
+  
 
   const handleLogout = () => {
     logout();
@@ -39,9 +43,16 @@ export default function TodoPage() {
     fetchTodos();
   }, []);
 
+  useEffect(() => {
+    if (!localStorage.getItem('token')) {
+      navigate('/');
+    }
+  }, []);
+
   return (
     <div>
       <h2>📝 할 일 목록</h2>
+      <h3 className="text-gray-600">환영합니다, {email.email}님!</h3>
       <button onClick={handleLogout}>로그아웃</button>
       <input value={text} onChange={(e) => setText(e.target.value)} />
       <button onClick={handleAdd}>추가</button>
