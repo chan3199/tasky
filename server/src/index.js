@@ -24,7 +24,7 @@ app.use('/api/todos', todoRoutes);
 app.use('/api/auth', authRoutes);
 
 app.get('/', (req, res) => {
-  res.send('Tasky API is running!');
+  res.send('Tasky API 실행 중');
 });
 
 app.listen(4000, () => {
