@@ -8,7 +8,6 @@ const todoRoutes = require('./routes/todo');
 const corsOption = {
   origin: 'https://wondrous-unicorn-f48837.netlify.app',
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
-  credentials: true
 }
 
 app.use(cors(corsOption));
