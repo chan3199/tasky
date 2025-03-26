@@ -5,11 +5,11 @@ const app = express();
 const authRoutes = require('./routes/auth');
 const todoRoutes = require('./routes/todo');
 
-// ✅ 모든 요청에 대해 CORS 허용
-app.use(cors());
-
-// ✅ Preflight 요청 처리 (여기 추가!)
-app.options('*', cors());
+app.use(cors({
+  origin: 'https://wondrous-unicorn-f48837.netlify.app',
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  credentials: true
+}));
 
 app.use(express.json());
 app.use('/api/todos', todoRoutes);
