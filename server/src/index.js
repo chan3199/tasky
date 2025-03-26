@@ -7,7 +7,7 @@ const authRoutes = require('./routes/auth');
 const todoRoutes = require('./routes/todo');
 
 app.use((req, res, next) => {
-  console.log(`[${req.method}] ${req.originalUrl}`); // ← 요청 메서드 및 경로 확인
+  console.log(`[${req.method}] ${req.originalUrl}`, req.headers.origin);
   next();
 });
 
