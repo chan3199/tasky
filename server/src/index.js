@@ -5,11 +5,15 @@ const app = express();
 const authRoutes = require('./routes/auth');
 const todoRoutes = require('./routes/todo');
 
-app.use(cors({
+const corsOption = {
   origin: 'https://wondrous-unicorn-f48837.netlify.app',
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
   credentials: true
-}));
+}
+
+app.use(cors(corsOption));
+
+app.options('*', cors(corsOption));
 
 app.use(express.json());
 app.use('/api/todos', todoRoutes);
