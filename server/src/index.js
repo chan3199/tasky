@@ -1,40 +1,25 @@
 const express = require('express');
 const cors = require('cors');
 const app = express();
-require('dotenv').config();
 
-const authRoutes = require('./routes/auth');
-const todoRoutes = require('./routes/todo');
-
-// ✅ 모든 origin 허용 (임시)
+// 💡 완전 허용하는 CORS 옵션
 const corsOptions = {
   origin: '*',
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization'],
 };
 
-// ✅ Preflight 요청 허용
-app.options('*', cors(corsOptions));
-
-// ✅ 실제 요청에도 cors 적용
 app.use(cors(corsOptions));
 app.use(express.json());
 
-// ✅ 요청 로그 확인용 (Render 로그 찍힘)
-app.use((req, res, next) => {
-  console.log(`[REQ] ${req.method} ${req.path}`);
-  next();
+// 💡 모든 OPTIONS 요청을 처리하도록 명시
+app.options('*', cors(corsOptions));
+
+app.post('/api/auth/signup', (req, res) => {
+  console.log('✅ POST /signup reached');
+  res.json({ success: true });
 });
 
-// 라우터
-app.use('/api/auth', authRoutes);
-app.use('/api/todos', todoRoutes);
-
-app.get('/', (req, res) => {
-  res.send('Tasky API is running!');
-});
-
-const PORT = process.env.PORT || 4000;
-app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
+app.listen(process.env.PORT || 4000, () => {
+  console.log(`Server running on port ${process.env.PORT || 4000}`);
 });
