@@ -14,8 +14,9 @@ export default function LoginPage() {
       const res = await login(email, password);
       localStorage.setItem('token', res.data.token);
       navigate('/todos');
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     } catch (err) {
-      setError('로그인에 실패했습니다. 이메일과 비밀번호를 확인해주세요.\n'+err);
+      setError('로그인에 실패했습니다. 이메일과 비밀번호를 확인해주세요.');
     }
   };
 

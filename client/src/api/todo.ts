@@ -26,3 +26,9 @@ export const deleteTodo = async (id: number) => {
   const res = await API.delete(`/todos/${id}`);
   return res.data;
 };
+
+export const toggleTodo = async (id: number) => {
+  const res = await API.patch(`/todos/${id}`);
+  return res.data;
+};
+

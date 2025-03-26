@@ -13,8 +13,9 @@ export default function SignupPage() {
     try {
       await signup(email, password);
       navigate('/login');
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     } catch (err) {
-      setError('회원가입에 실패했습니다. 이미 존재하는 계정일 수 있습니다.\n'+err);
+      setError('회원가입에 실패했습니다. 이미 존재하는 계정일 수 있습니다.');
     }
   };
 
@@ -47,7 +48,7 @@ export default function SignupPage() {
         {error && <p className="text-red-500 text-sm text-center">{error}</p>}
       </form>
       <p className="text-center mt-4 text-sm">
-        이미 계정이 있으신가요? <a href="/login" className="text-blue-600 hover:underline">로그인</a>
+        이미 계정이 있으신가요? <a href="../" className="text-blue-600 hover:underline">로그인</a>
       </p>
     </div>
   );
