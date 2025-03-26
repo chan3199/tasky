@@ -1,31 +1,59 @@
-import AuthForm from '../components/AuthForm';
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { login } from '../api/auth';
-import { useNavigate, Link } from 'react-router-dom';
-import { notify } from '../utils/toast';
-import { AxiosError } from 'axios';
+import { toast } from 'react-hot-toast';
 
 export default function Login() {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
   const navigate = useNavigate();
 
-  const handleLogin = async (email: string, password: string) => {
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
     try {
-      localStorage.setItem('token', (await login(email, password)).data.token);
-      notify('로그인 성공!');
+      await login( email, password );
+      toast.success('로그인 성공!');
       navigate('/todos');
-    } catch (err) {
-      const axiosErr = err as AxiosError<{ message?: string }>;
-      const errorMessage = axiosErr.response?.data?.message || '처리 중 오류가 발생했습니다.';
-      notify(errorMessage);
+    } catch {
+      toast.error('이메일 또는 비밀번호가 올바르지 않습니다.');
     }
   };
 
   return (
-    <>
-      <AuthForm title="로그인" buttonText="로그인" onSubmit={handleLogin} />
-      <p className="text-center mt-4 text-sm text-gray-500">
-        계정이 없으신가요?{' '}
-        <Link to="/signup" className="text-blue-500 underline">회원가입</Link>
-      </p>
-    </>
+    <div className="min-h-screen bg-gray-50 flex items-center justify-center px-4">
+      <div className="max-w-md w-full bg-white p-8 rounded-2xl shadow-md">
+        <h2 className="text-2xl font-bold mb-6 text-center">로그인</h2>
+        <form onSubmit={handleSubmit} className="space-y-4">
+          <input
+            type="email"
+            placeholder="이메일을 입력하세요"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            required
+            className="w-full px-4 py-3 border rounded-xl bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500"
+          />
+          <input
+            type="password"
+            placeholder="비밀번호를 입력하세요"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            required
+            className="w-full px-4 py-3 border rounded-xl bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500"
+          />
+          <button
+            type="submit"
+            className="w-full bg-blue-600 text-white py-3 rounded-xl font-semibold hover:bg-blue-700 transition"
+          >
+            로그인
+          </button>
+        </form>
+        <p className="mt-4 text-center text-sm text-gray-500">
+          계정이 없으신가요?{' '}
+          <a href="/signup" className="text-blue-500 font-medium hover:underline">
+            회원가입
+          </a>
+        </p>
+      </div>
+    </div>
   );
 }
