@@ -19,9 +19,6 @@ app.use((req, res, next) => {
 });
 
 app.use(cors(corsOption));
-
-app.options('*', cors(corsOption));
-
 app.use(express.json());
 app.use('/api/todos', todoRoutes);
 app.use('/api/auth', authRoutes);
