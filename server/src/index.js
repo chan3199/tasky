@@ -6,6 +6,11 @@ const app = express();
 const authRoutes = require('./routes/auth');
 const todoRoutes = require('./routes/todo');
 
+app.use((req, res, next) => {
+  console.log(`[${req.method}] ${req.originalUrl}`); // ← 요청 메서드 및 경로 확인
+  next();
+});
+
 // ✅ CORS 옵션 명확하게 지정
 const corsOptions = {
   origin: 'https://wondrous-unicorn-f48837.netlify.app',
@@ -27,11 +32,6 @@ app.use(express.json());
 // ✅ 라우터 등록
 app.use('/api/todos', todoRoutes);
 app.use('/api/auth', authRoutes);
-
-app.use((req, res, next) => {
-  console.log(`[${req.method}] ${req.originalUrl}`); // ← 요청 메서드 및 경로 확인
-  next();
-});
 
 // ✅ 기본 라우트
 app.get('/', (req, res) => {
