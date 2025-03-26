@@ -7,7 +7,7 @@ const authRoutes = require('./routes/auth');
 const todoRoutes = require('./routes/todo');
 
 app.use((req, res, next) => {
-  console.log(`[${req.method}] ${req.originalUrl}`, req.headers.origin);
+  console.log(`[REQ] ${req.method} ${req.originalUrl}`);
   next();
 });
 
@@ -17,6 +17,14 @@ const corsOptions = {
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   credentials: true,
 };
+
+app.options('*', (req, res) => {
+  res.header('Access-Control-Allow-Origin', 'https://wondrous-unicorn-f48837.netlify.app');
+  res.header('Access-Control-Allow-Methods', 'GET,POST,PUT,DELETE,OPTIONS');
+  res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+  res.header('Access-Control-Allow-Credentials', 'true');
+  res.sendStatus(200);
+});
 
 // 가장 먼저 적용!
 app.use(cors(corsOptions));
