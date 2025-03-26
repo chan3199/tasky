@@ -28,6 +28,11 @@ app.use(express.json());
 app.use('/api/todos', todoRoutes);
 app.use('/api/auth', authRoutes);
 
+app.use((req, res, next) => {
+  console.log(`[${req.method}] ${req.originalUrl}`); // ← 요청 메서드 및 경로 확인
+  next();
+});
+
 // ✅ 기본 라우트
 app.get('/', (req, res) => {
   res.send('Tasky API 실행 중');
