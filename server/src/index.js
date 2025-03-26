@@ -1,25 +1,15 @@
+require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
 const app = express();
 
-// 💡 완전 허용하는 CORS 옵션
-const corsOptions = {
-  origin: '*',
-  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-  allowedHeaders: ['Content-Type', 'Authorization'],
-};
-
-app.use(cors(corsOptions));
+app.use(cors()); // 임시로 전체 허용
 app.use(express.json());
 
-// 💡 모든 OPTIONS 요청을 처리하도록 명시
-app.options('*', cors(corsOptions));
-
-app.post('/api/auth/signup', (req, res) => {
-  console.log('✅ POST /signup reached');
-  res.json({ success: true });
+app.get('/', (req, res) => {
+  res.send('Tasky API is running!');
 });
 
-app.listen(process.env.PORT || 4000, () => {
-  console.log(`Server running on port ${process.env.PORT || 4000}`);
+app.listen(4000, () => {
+  console.log('Server on http://localhost:4000');
 });

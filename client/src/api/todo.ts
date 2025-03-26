@@ -1,7 +1,8 @@
 import axios from 'axios';
 
 const API = axios.create({
-  baseURL: 'http://localhost:4000/api',
+  baseURL: import.meta.env.VITE_API_URL,
+  withCredentials: true,
 });
 
 // 토큰 자동 주입
