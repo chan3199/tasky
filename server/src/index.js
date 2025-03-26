@@ -1,32 +1,28 @@
-require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
 const app = express();
-const authRoutes = require('./routes/auth');
-const todoRoutes = require('./routes/todo');
 
-const corsOption = {
-  origin: 'https://wondrous-unicorn-f48837.netlify.app',
-  methods: ['GET', 'POST', 'PUT', 'DELETE'],
-}
-
+// ✅ 1. CORS 직접 설정 (모든 Origin 허용: 테스트용)
 app.use((req, res, next) => {
-  res.header('Access-Control-Allow-Origin', 'https://wondrous-unicorn-f48837.netlify.app');
-  res.header('Access-Control-Allow-Credentials', 'true');
-  res.header('Access-Control-Allow-Methods', 'GET,POST,PUT,DELETE,OPTIONS');
-  res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+  res.setHeader('Access-Control-Allow-Origin', 'https://wondrous-unicorn-f48837.netlify.app');
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+  res.setHeader('Access-Control-Allow-Credentials', 'true');
   next();
 });
 
-app.use(cors(corsOption));
-app.use(express.json());
-app.use('/api/todos', todoRoutes);
-app.use('/api/auth', authRoutes);
-
-app.get('/', (req, res) => {
-  res.send('Tasky API 실행 중');
+// ✅ 2. preflight 요청 처리 (OPTIONS에 대한 응답 추가)
+app.options('*', (req, res) => {
+  res.sendStatus(200);
 });
 
+// ✅ 3. 기타 설정
+app.use(express.json());
+
+// ✅ 4. 라우터 등록
+app.use('/api/auth', require('./routes/auth'));
+app.use('/api/todos', require('./routes/todo'));
+
 app.listen(4000, () => {
-  console.log('Server running on http://localhost:4000');
+  console.log('✅ Server running on http://localhost:4000');
 });
