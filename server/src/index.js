@@ -1,41 +1,37 @@
-require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
 const app = express();
+require('dotenv').config();
 
 const authRoutes = require('./routes/auth');
 const todoRoutes = require('./routes/todo');
 
-app.use((req, res, next) => {
-  console.log(`[REQ] ${req.method} ${req.originalUrl}`);
-  next();
-});
-
-// ✅ CORS 옵션 명확하게 지정
+// ✅ 모든 origin 허용 (임시)
 const corsOptions = {
-  origin: 'https://wondrous-unicorn-f48837.netlify.app',
+  origin: '*',
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-  credentials: true,
+  allowedHeaders: ['Content-Type', 'Authorization'],
 };
 
-app.options('*', (req, res) => {
-  res.header('Access-Control-Allow-Origin', 'https://wondrous-unicorn-f48837.netlify.app');
-  res.header('Access-Control-Allow-Methods', 'GET,POST,PUT,DELETE,OPTIONS');
-  res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization');
-  res.header('Access-Control-Allow-Credentials', 'true');
-  res.sendStatus(200);
-});
+// ✅ Preflight 요청 허용
+app.options('*', cors(corsOptions));
 
-// 가장 먼저 적용!
+// ✅ 실제 요청에도 cors 적용
 app.use(cors(corsOptions));
 app.use(express.json());
 
+// ✅ 요청 로그 확인용 (Render 로그 찍힘)
+app.use((req, res, next) => {
+  console.log(`[REQ] ${req.method} ${req.path}`);
+  next();
+});
+
+// 라우터
 app.use('/api/auth', authRoutes);
 app.use('/api/todos', todoRoutes);
 
-// ✅ 기본 라우트
 app.get('/', (req, res) => {
-  res.send('Tasky API 실행 중');
+  res.send('Tasky API is running!');
 });
 
 const PORT = process.env.PORT || 4000;
