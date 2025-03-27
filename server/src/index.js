@@ -4,17 +4,10 @@ const cors = require('cors');
 const authRoutes = require('./routes/auth');
 const todoRoutes = require('./routes/todo');
 
+const API = process.env.API_URL
+
 const app = express();
-
-// CORS 설정
-const corsOptions = {
-  origin: 'http://localhost:5175', // Vite dev server
-  credentials: true,
-};
-
-app.use(cors(corsOptions));
-
-// Body 파싱
+app.use(cors({ origin: API, credentials: true }));
 app.use(express.json());
 
 // 라우터 연결

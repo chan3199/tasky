@@ -13,22 +13,22 @@ API.interceptors.request.use((config) => {
 });
 
 export const getTodos = async () => {
-  const res = await API.get('/todos');
+  const res = await API.get('/api/todos');
   return res.data;
 };
 
 export const addTodo = async (text: string) => {
-  const res = await API.post('/todos', { text });
+  const res = await API.post('/api/todos', { text });
   return res.data;
 };
 
 export const deleteTodo = async (id: number) => {
-  const res = await API.delete(`/todos/${id}`);
+  const res = await API.delete(`/api/todos/${id}`);
   return res.data;
 };
 
 export const toggleTodo = async (id: number) => {
-  const res = await API.patch(`/todos/${id}`);
+  const res = await API.patch(`/api/todos/${id}`);
   return res.data;
 };
 
