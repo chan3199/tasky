@@ -8,7 +8,7 @@ const app = express();
 
 // CORS 설정
 const corsOptions = {
-  origin: 'http://localhost:5173', // Vite dev server
+  origin: 'http://localhost:5175', // Vite dev server
   credentials: true,
 };
 

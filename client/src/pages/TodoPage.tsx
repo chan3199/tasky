@@ -15,7 +15,7 @@ export default function TodoPage() {
         setTodos(data);
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
       } catch (err) {
-        navigate('/login');
+        navigate('/');
       }
     };
     fetchTodos();
@@ -43,13 +43,13 @@ export default function TodoPage() {
   const handleLogout = () => {
     localStorage.removeItem('token');
     localStorage.removeItem('email');
-    navigate('/login');
+    navigate('/');
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 flex items-center justify-center px-4 py-10">
-      <div className="w-full max-w-[3000px] px-8 py-6 flex flex-col items-center">
-        <header className="flex justify-between items-center mb-10">
+    <div className="min-h-screen bg-gray-50 px-4 py-10">
+      <div className="w-full max-w-2xl mx-auto flex flex-col items-center">
+        <header className="w-full flex justify-between items-center mb-10">
           <h1 className="text-4xl font-extrabold text-gray-900">TASKY</h1>
           <button
             onClick={handleLogout}
@@ -59,7 +59,7 @@ export default function TodoPage() {
           </button>
         </header>
 
-        <main className="bg-white shadow-md rounded-2xl p-10 text-center">
+        <main className="w-full bg-white shadow-md rounded-2xl p-10">
           <h2 className="text-2xl font-bold mb-1">할 일 목록</h2>
           <p className="text-sm text-gray-500 mb-6">환영합니다, {email}님!</p>
 
