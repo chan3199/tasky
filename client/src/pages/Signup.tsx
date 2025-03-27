@@ -12,7 +12,7 @@ export default function SignupPage() {
     e.preventDefault();
     try {
       await signup(email, password);
-      navigate('/login');
+      navigate('/');
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     } catch (err) {
       setError('회원가입에 실패했습니다. 이미 존재하는 계정일 수 있습니다.');
