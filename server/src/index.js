@@ -4,10 +4,10 @@ const cors = require('cors');
 const authRoutes = require('./routes/auth');
 const todoRoutes = require('./routes/todo');
 
-const API = process.env.API_URL
+const API_URL = process.env.API_URL
 
 const app = express();
-app.use(cors({ origin: API, credentials: true }));
+app.use(cors({ origin: API_URL, credentials: true }));
 app.use(express.json());
 
 // 라우터 연결
